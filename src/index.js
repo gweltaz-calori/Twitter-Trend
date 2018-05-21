@@ -12,6 +12,11 @@ const TrendStream = require('./streams/TrendStream')
 const CountryStream = require('./streams/CountryStream')
 const DeviceStream = require('./streams/DeviceStream')
 const EmojiStream = require('./streams/EmojiStream')
+const WordStream = require('./streams/WordStream')
+
+const SocketEmojiStream = require('./streams/SocketEmojiStream')
+const SocketDeviceStream = require('./streams/SocketDeviceStream')
+const SocketWordStream = require('./streams/SocketWordStream')
 
 socketIo.on('connection', socket => { })
 
@@ -33,10 +38,14 @@ server.listen(process.env.SERVER_PORT, () => {
 let mainStream = new TrendStream('Trump')
     .pipe(new CountryStream('en'))
 
-/* 
-mainStream.pipe(new DeviceStream())
-    .pipe(process.stdout) */
+mainStream
+    .pipe(new DeviceStream())
+    .pipe(new SocketDeviceStream(socketIo))
 
+mainStream
+    .pipe(new EmojiStream())
+    .pipe(new SocketEmojiStream(socketIo))
 
-mainStream.pipe(new EmojiStream())
-    .pipe(process.stdout)
+mainStream
+    .pipe(new WordStream())
+    .pipe(new SocketWordStream(socketIo))

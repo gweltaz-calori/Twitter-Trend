@@ -18,7 +18,11 @@ module.exports = class DeviceStream extends Transform {
             name: DEVICES.find((deviceItem) => tweetSource.includes(deviceItem))
         }
 
-        this.push(JSON.stringify(os))
+        if (os.name) {
+            this.push(JSON.stringify(os))
+        }
+
+
 
 
         callback()

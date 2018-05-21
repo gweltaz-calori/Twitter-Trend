@@ -13,6 +13,7 @@
   "dependencies": {
     "country-data": "0.0.31",
     "dotenv": "^5.0.1",
+    "natural": "^0.6.0",
     "socket.io": "^2.1.1",
     "twemoji": "^2.5.1",
     "twitter": "^1.7.1"

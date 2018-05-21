@@ -10,10 +10,16 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
     <script>
+
+        const ON_EMOJI = "ON_EMOJI"
+        const ON_DEVICE = "ON_DEVICE"
+        const ON_WORD = "ON_WORD"
+
         const socket = io.connect();
-        socket.on('tweet', tweet => {
-            console.log(tweet)
-        })
+
+        socket.on(ON_EMOJI, emoji => console.log(emoji))
+        socket.on(ON_DEVICE, device => console.log(device))
+        socket.on(ON_WORD, words => console.log(words))
     </script>
 </body>
 
