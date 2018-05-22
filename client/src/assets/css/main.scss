@@ -1,0 +1,29 @@
+@import "fonts";
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Prompt";
+  user-select: none;
+}
+
+body {
+  background: linear-gradient(140.4deg, #3c22b3 13.25%, #5908d3 79.4%);
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+input {
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  outline: 0;
+}

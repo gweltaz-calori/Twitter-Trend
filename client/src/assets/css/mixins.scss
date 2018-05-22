@@ -1,0 +1,38 @@
+@mixin centerIE($horizontal: true, $vertical: true) {
+    position: relative;
+    @if ($horizontal and $vertical) {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    } @else if ($horizontal) {
+        left: 50%;
+        transform: translate(-50%, 0);
+    } @else if ($vertical) {
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+}
+
+@mixin centerRow($horizontal: true, $vertical: true) {
+    display: flex;
+    @if ($horizontal and $vertical) {
+        align-items: center;
+        justify-content:center;
+    } @else if ($horizontal) {
+        justify-content: center;
+    } @else if ($vertical) {
+        align-items: center;
+    }
+}
+
+@mixin centerColumn($horizontal: true, $vertical: true) {
+    display: flex;
+    @if ($horizontal and $vertical) {
+        align-items: center;
+        justify-content:center;
+    } @else if ($horizontal) {
+        align-items: center;
+    } @else if ($vertical) {
+        justify-content: center;
+    }
+}

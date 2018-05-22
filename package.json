@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./src/index.js",
+    "client": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "start": "node ./src/index.js"
   },
   "keywords": [],

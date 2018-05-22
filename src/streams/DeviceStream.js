@@ -1,32 +1,25 @@
-const { Transform } = require('stream')
+const { Transform } = require("stream");
 
-const DEVICES = [
-    "Android",
-    "iPhone",
-    "Web"
-]
+const DEVICES = ["Android", "iPhone", "Web"];
 
 module.exports = class DeviceStream extends Transform {
-    constructor() {
-        super({ objectMode: true })
+  constructor() {
+    super({ objectMode: true });
+  }
+
+  _transform(chunk, encoding, callback) {
+    let tweetSource = JSON.parse(chunk.toString()).source;
+
+    if (tweetSource) {
+      let os = {
+        name: DEVICES.find(deviceItem => tweetSource.includes(deviceItem))
+      };
+
+      if (os.name) {
+        this.push(JSON.stringify(os));
+      }
     }
 
-    _transform(chunk, encoding, callback) {
-        let tweetSource = JSON.parse(chunk.toString()).source
-
-        let os = {
-            name: DEVICES.find((deviceItem) => tweetSource.includes(deviceItem))
-        }
-
-        if (os.name) {
-            this.push(JSON.stringify(os))
-        }
-
-
-
-
-        callback()
-    }
-
-
-}
+    callback();
+  }
+};
