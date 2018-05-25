@@ -10,10 +10,17 @@ module.exports = class DeviceStream extends Transform {
     let tweetText = JSON.parse(chunk.toString()).text;
     let emoji = {};
 
-    twemoji.parse(tweetText, (icon, opts, variant) => {
-      emoji.code = icon;
-      emoji.imageUrl = `${opts.base}${opts.size}/${icon}${opts.ext}`;
-    });
+    try {
+      twemoji.parse(tweetText, (icon, opts, variant) => {
+        emoji.code = icon;
+        emoji.imageUrl = `${opts.base}${opts.size}/${icon}${opts.ext}`;
+      });
+
+    }
+    catch (e) {
+      console.log('Error parsing emoji')
+    }
+
 
     if (emoji.imageUrl) {
       this.push(JSON.stringify(emoji));

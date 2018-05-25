@@ -14,6 +14,10 @@ body {
   background: linear-gradient(140.4deg, #3c22b3 13.25%, #5908d3 79.4%);
 }
 
+body {
+  overflow: hidden;
+}
+
 html,
 body {
   height: 100%;
@@ -26,4 +30,22 @@ input {
   border: 0;
   margin: 0;
   outline: 0;
+}
+
+
+.flip-list-move,
+.flip-list-enter-active,
+.flip-list-leave-active {
+  transition: transform 0.15s, opacity 0.15s;
+}
+
+.flip-list-enter,
+.flip-list-leave-to {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.flip-list-enter-to {
+  opacity: 1;
+  transform: scale(1);
 }

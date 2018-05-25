@@ -30,7 +30,7 @@ export default class SocketManager {
   }
 
   static changeTrend(trend) {
-    this.socket.emit(ON_TREND_CHANGE, { trend });
+    this.socket.emit(ON_TREND_CHANGED, { trend });
   }
 
   static changeLang(lang) {

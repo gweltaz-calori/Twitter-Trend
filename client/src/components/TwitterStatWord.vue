@@ -48,13 +48,12 @@ export default {
 };
 </script>
 <style scoped>
+.stat {
+  width: 75px;
+}
 .words {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.flip-list-move {
-  transition: transform 0.3s;
 }
 </style>

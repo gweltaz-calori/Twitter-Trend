@@ -1,5 +1,5 @@
 <template>
-    <div class="countries">
+    <div class="countries" v-show="selectedCountry">
         <div class="country-list">
             <div @click="changeLang(country)" :key="country.locale" v-for="country in countries" class="country-item" :class="{'country-active':selectedCountry == country.locale}">
                 <div class="indicator"></div>
@@ -14,6 +14,7 @@
     </div>
 </template>
 <script>
+import { getActiveFilter } from "@/api/";
 export default {
   data() {
     return {
@@ -35,8 +36,12 @@ export default {
           locale: "en"
         }
       ],
-      selectedCountry: "world"
+      selectedCountry: null
     };
+  },
+  async beforeMount() {
+    const filter = await getActiveFilter();
+    this.selectedCountry = filter.lang;
   },
   methods: {
     changeLang(country) {
@@ -48,7 +53,7 @@ export default {
 </script>
 <style scoped>
 .countries {
-  position: relative;
+  position: absolute;
   display: flex;
   align-items: center;
   margin: auto 0;

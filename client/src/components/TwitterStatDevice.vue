@@ -2,7 +2,7 @@
     <div class="stat">
         <twitter-title>user devices</twitter-title>
         <div class="devices">
-            <twitter-device class="twitter-device" v-for="(device,key) in devices" :key="key" :percentage="device.value / population" :icon="device.image"></twitter-device>
+            <twitter-device class="twitter-device" v-for="(device,key) in devices" :key="key" :percentage="(device.value / population) || 0" :icon="device.image"></twitter-device>
         </div>
     </div>
 </template>
@@ -41,6 +41,7 @@ export default {
   },
   methods: {
     resetStat() {
+      this.population = 0;
       for (let device in this.devices) {
         this.devices[device].value = 0;
       }
@@ -56,6 +57,9 @@ export default {
 };
 </script>
 <style scoped>
+.stat {
+  width: 133px;
+}
 .devices {
   display: flex;
   flex-direction: column;

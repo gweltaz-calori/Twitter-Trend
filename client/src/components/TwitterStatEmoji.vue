@@ -1,7 +1,7 @@
 <template>
     <div class="stat">
         <twitter-title>TOP EMOJIS</twitter-title>
-        <transition-group name="flip-list" tag="div" class="emojis">
+        <transition-group appear name="flip-list" tag="div" class="emojis">
             <twitter-emoji class="emoji" :key="emoji.code" v-for="emoji in fitleredEmojis" :src="emoji.imageUrl"></twitter-emoji>
         </transition-group>
     </div>
@@ -51,6 +51,9 @@ export default {
 };
 </script>
 <style scoped>
+.stat {
+  width: 72px;
+}
 .emojis {
   display: flex;
   flex-direction: column;
@@ -60,9 +63,5 @@ export default {
 
 .emoji {
   margin: 16px 0;
-}
-
-.flip-list-move {
-  transition: transform 0.3s;
 }
 </style>

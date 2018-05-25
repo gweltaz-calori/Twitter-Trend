@@ -93,7 +93,7 @@ module.exports = {
             {
               loader: "postcss-loader",
               options: {
-                plugins: function() {
+                plugins: function () {
                   return [
                     autoprefixer("last 10 versions", "Firefox >= 18", "ie 10")
                   ];
@@ -147,7 +147,10 @@ module.exports = {
     noInfo: false,
     overlay: true,
     clientLogLevel: "none",
-    setup: function(app) {
+    proxy: {
+      "/api": "http://localhost:5600"
+    },
+    setup: function (app) {
       app.use("static", express.static(path.resolve(__dirname, "static")));
     }
   },

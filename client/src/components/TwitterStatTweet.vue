@@ -42,17 +42,15 @@ export default {
 };
 </script>
 <style scoped>
+.stat {
+  width: 379px;
+}
 .tweets {
-  display: flex;
-  flex-direction: column;
   margin-top: 21px;
+  height: 392px;
 }
 
 .tweet {
   margin-bottom: 39px;
-}
-
-.flip-list-move {
-  transition: transform 0.3s;
 }
 </style>

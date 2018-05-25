@@ -1,9 +1,9 @@
 <template>
-    <div id="app">
-        <twitter-countries-filters @langChanged="changeLang"></twitter-countries-filters>
-        <div class="topbar">
+    <div id="app" >
+        <twitter-countries-filters @langChanged="changeLang" ></twitter-countries-filters>
+        <div v-if="trendWord" class="topbar">
             <twitter-input v-model="trendWord" placeholder="TREND"></twitter-input>
-            <twitter-trends @onSuggestionTrendClick="onSuggestionTrendClick"></twitter-trends>
+            <twitter-trends :trends="trends" @onSuggestionTrendClick="onSuggestionTrendClick"></twitter-trends>
         </div>
         <div class="stats">
             <twitter-stat-emoji ref="emoji" class="stat"></twitter-stat-emoji>
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { getCurrentTrends, getActiveTrend } from "@/api";
 import SocketManager from "@/js/SocketManager";
 
 import TwitterCountriesFilters from "@/components/TwitterCountriesFilters.vue";
@@ -41,11 +42,18 @@ export default {
   },
   data() {
     return {
-      trendWord: ""
+      trendWord: null,
+      trends: []
     };
   },
+  async beforeMount() {
+    this.trends = await getCurrentTrends();
+    this.trendWord = await getActiveTrend();
+  },
   methods: {
-    onSuggestionTrendClick(trend) {},
+    onSuggestionTrendClick(trend) {
+      this.trendWord = trend.name;
+    },
     changeLang(lang) {
       SocketManager.changeLang(lang);
       this.reset();
@@ -76,6 +84,7 @@ export default {
 
 .stats {
   padding: 0 200px;
+  height: 555px;
   display: inline-flex;
   flex-direction: row;
 }
@@ -94,5 +103,6 @@ export default {
 
 .stat {
   margin: 0 80px;
+  height: 555px;
 }
 </style>

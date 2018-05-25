@@ -1,16 +1,15 @@
 <template>
     <div class="trends">
-        <div @click="onTrendClick(trend)" class="trend" v-for="trend in trends" :key="trend">{{trend}}</div>
+        <div @click="onTrendClick(trend)" class="trend" v-for="trend in trends" :key="trend.name">{{trend.name}}</div>
     </div>
 </template>
 
 <script>
 export default {
+  props: ["trends"],
   data() {
     //todo fetch from server
-    return {
-      trends: ["Trump", "Narcos", "Obama"]
-    };
+    return {};
   },
   methods: {
     onTrendClick(trend) {

@@ -7,11 +7,17 @@ module.exports = class WordStream extends Transform {
     }
 
     _transform(chunk, encoding, callback) {
-        let tweetText = JSON.parse(chunk.toString()).text
 
-        this.push(
-            JSON.stringify(getWordsOccurenceCount(tweetText))
-        )
+
+        try {
+            let tweetText = JSON.parse(chunk.toString()).text
+            this.push(
+                JSON.stringify(getWordsOccurenceCount(tweetText))
+            )
+        }
+        catch (e) {
+
+        }
 
         callback()
     }
