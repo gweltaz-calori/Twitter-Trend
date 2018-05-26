@@ -1,8 +1,8 @@
 <template>
     <div class="stat">
         <twitter-title>most used words</twitter-title>
-        <transition-group name="flip-list" tag="div" class="words">
-            <twitter-word :key="value" v-for="(value,key) in filteredWords">{{value}}</twitter-word>
+        <transition-group  name="flip-list" tag="div" class="words">
+            <twitter-word class="word" :key="value" v-for="(value,key) in filteredWords">{{value}}</twitter-word>
         </transition-group>
     </div>
 </template>
@@ -18,7 +18,8 @@ export default {
   },
   data() {
     return {
-      words: {}
+      words: {},
+      animating: false
     };
   },
   computed: {

@@ -9,7 +9,7 @@
             <twitter-stat-emoji ref="emoji" class="stat"></twitter-stat-emoji>
             <twitter-stat-word ref="word" class="stat"></twitter-stat-word>
             <twitter-stat-device ref="device" class="stat"></twitter-stat-device>
-            <twitter-stat-tweet ref="tweet" class="stat"></twitter-stat-tweet>
+            <twitter-stat-tweet ref="tweet" class="stat"></twitter-stat-tweet> 
         </div>
     </div>
 </template>
@@ -52,7 +52,8 @@ export default {
   },
   methods: {
     onSuggestionTrendClick(trend) {
-      this.trendWord = trend.name;
+      this.trendWord = trend;
+      this.reset();
     },
     changeLang(lang) {
       SocketManager.changeLang(lang);

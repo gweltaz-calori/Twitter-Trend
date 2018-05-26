@@ -40,7 +40,10 @@ export default {
           imageUrl: emoji.imageUrl,
           count: 0
         };
-        this.emojis.push(existingEmoji);
+
+        if (this.emojis.length <= 15) {
+          this.emojis.push(existingEmoji);
+        }
       }
       existingEmoji.count++;
     }

@@ -1,6 +1,6 @@
 <template>
     <div class="trends">
-        <div @click="onTrendClick(trend)" class="trend" v-for="trend in trends" :key="trend.name">{{trend.name}}</div>
+        <div :class="{'active':activeTrend == trend}" @click="onTrendClick(trend)" class="trend" v-for="trend in trends" :key="trend">{{trend}}</div>
     </div>
 </template>
 
@@ -9,12 +9,18 @@ export default {
   props: ["trends"],
   data() {
     //todo fetch from server
-    return {};
+    return {
+      activeTrend: null
+    };
   },
   methods: {
     onTrendClick(trend) {
       this.$emit("onSuggestionTrendClick", trend);
+      this.activeTrend = trend;
     }
+  },
+  mounted() {
+    this.onTrendClick(this.trends[0]);
   }
 };
 </script>
@@ -35,5 +41,10 @@ export default {
   margin: 0 3px;
   cursor: pointer;
   color: rgba(255, 255, 255, 0.66);
+}
+
+.active {
+  color: rgba(255, 255, 255, 1);
+  font-weight: bold;
 }
 </style>

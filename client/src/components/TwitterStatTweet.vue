@@ -1,9 +1,9 @@
 <template>
     <div class="stat">
         <twitter-title>TWEETS WITH THE MORE FOLLOWERS</twitter-title>
-        <transition-group tag="div" name="flip-list" class="tweets">
+        <div class="tweets">
             <twitter-tweet :tweet="tweet" :key="tweet.id" v-for="tweet in sortedTweets" class="tweet"></twitter-tweet>
-        </transition-group>
+        </div>
     </div>
 </template>
 <script>
@@ -18,22 +18,37 @@ export default {
   },
   data() {
     return {
-      tweets: []
+      tweets: [],
+      animating: false
     };
   },
   computed: {
     sortedTweets() {
-      return this.tweets
-        .sort((a, b) => b.followersCount - a.followersCount)
-        .slice(0, 2);
+      return this.tweets.sort((a, b) => b.followersCount - a.followersCount);
     }
   },
   methods: {
     resetStat() {
       this.tweets = [];
     },
+    enter() {
+      this.animating = true;
+      setTimeout(() => {
+        this.animating = false;
+      }, 600);
+    },
+    afterEnter() {},
     onTweet(tweet) {
-      this.tweets.push(tweet);
+      if (this.animating) return;
+
+      for (let i = 0; i < 3; i++) {
+        let arrTweet = this.tweets[i];
+
+        if (!arrTweet || arrTweet.followersCount < tweet.followersCount) {
+          this.$set(this.tweets, i, tweet);
+          break;
+        }
+      }
     }
   },
   mounted() {

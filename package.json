@@ -16,7 +16,9 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "natural": "^0.6.0",
+    "node-tweet-stream": "^2.0.3",
     "socket.io": "^2.1.1",
+    "tweets": "0.0.6",
     "twemoji": "^2.5.1",
     "twitter": "^1.7.1"
   }

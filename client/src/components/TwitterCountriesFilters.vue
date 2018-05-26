@@ -53,7 +53,6 @@ export default {
 </script>
 <style scoped>
 .countries {
-  position: absolute;
   display: flex;
   align-items: center;
   margin: auto 0;

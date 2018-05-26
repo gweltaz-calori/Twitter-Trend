@@ -26,8 +26,10 @@ const SocketTweetStream = require("./streams/SocketTweetStream");
 const ON_TREND_CHANGED = "ON_TREND_CHANGED";
 const ON_LANGUAGE_CHANGED = "ON_LANGUAGE_CHANGED";
 
+
+
 let countryStream = new CountryStream("en");
-let trendStream = new TrendStream("Trump")
+let trendStream = new TrendStream()
 
 let mainStream = trendStream.pipe(countryStream);
 
@@ -42,7 +44,7 @@ mainStream.pipe(new FormatTweetStream()).pipe(new SocketTweetStream(socketIo));
 socketIo.on("connection", socket => {
 
   socket.on(ON_TREND_CHANGED, data => {
-
+    trendStream.trend = data.trend
   });
 
   socket.on(ON_LANGUAGE_CHANGED, data => {
@@ -55,8 +57,7 @@ socketIo.on("connection", socket => {
 app.get('/api/trends', async (req, res) => {
   try {
     const data = await twitterClientInstance.get('trends/place', { id: 1 })
-
-    res.send(data[0].trends.slice(0, 3))
+    res.send([...trendStream.suggestions, ...data[0].trends.slice(0, 10).map(trend => trend.name)])
   }
   catch (e) {
     res.status(400).send("An error occured")
