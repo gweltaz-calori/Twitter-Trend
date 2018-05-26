@@ -15,7 +15,7 @@ const plugins = [
     }
   }),
   new HtmlWebpackPlugin({
-    template: "index.html",
+    template: path.resolve(__dirname, "index.html"),
     inject: true,
     filename: "index.html",
     hash: true,
@@ -44,7 +44,7 @@ if (!IS_DEV) {
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, "static"),
-        to: path.resolve(__dirname, "dist/static"),
+        to: path.resolve(__dirname, "../public/static"),
         ignore: [".*"]
       }
     ])
@@ -60,8 +60,8 @@ if (!IS_DEV) {
 module.exports = {
   entry: "./src/main.js",
   output: {
-    path: path.resolve(__dirname, "./dist"),
-    filename: "assets/js/dataviz.js"
+    path: path.resolve(__dirname, "../public"),
+    filename: "assets/js/twitter.js"
   },
   module: {
     rules: [
@@ -93,7 +93,7 @@ module.exports = {
             {
               loader: "postcss-loader",
               options: {
-                plugins: function () {
+                plugins: function() {
                   return [
                     autoprefixer("last 10 versions", "Firefox >= 18", "ie 10")
                   ];
@@ -145,12 +145,13 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     noInfo: false,
+    contentBase: path.resolve(__dirname, "../public"),
     overlay: true,
     clientLogLevel: "none",
     proxy: {
       "/api": "http://localhost:5600"
     },
-    setup: function (app) {
+    setup: function(app) {
       app.use("static", express.static(path.resolve(__dirname, "static")));
     }
   },

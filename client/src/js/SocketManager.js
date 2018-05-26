@@ -10,7 +10,9 @@ const ON_LANGUAGE_CHANGED = "ON_LANGUAGE_CHANGED";
 
 export default class SocketManager {
   static init() {
-    this.socket = io.connect("http://localhost:5600");
+    this.socket = io.connect(
+      process.env.NODE_ENV == "production" ? "" : "http://localhost:5600"
+    );
   }
 
   static onEmoji(cb) {

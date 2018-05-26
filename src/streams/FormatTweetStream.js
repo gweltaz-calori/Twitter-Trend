@@ -1,12 +1,13 @@
 const { Transform } = require("stream");
 
+//This stream is responsible for formatting tweets by removing useless properties
+
 module.exports = class FormatTweetStream extends Transform {
   constructor() {
     super({ objectMode: true });
   }
 
   _transform(chunk, encoding, callback) {
-
     try {
       let tweet = JSON.parse(chunk.toString());
 
@@ -18,10 +19,7 @@ module.exports = class FormatTweetStream extends Transform {
         image: tweet.user.profile_image_url
       };
       this.push(JSON.stringify(formattedTweet));
-    }
-    catch (e) {
-
-    }
+    } catch (e) {}
 
     callback();
   }

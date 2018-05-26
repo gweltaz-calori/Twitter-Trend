@@ -2,6 +2,8 @@ const { Writable } = require("stream");
 
 const ON_TWEET = "ON_TWEET";
 
+//This stream is a socket stream that will send the tweet output
+
 module.exports = class SocketTweetStream extends Writable {
   constructor(socket) {
     super({ objectMode: true });
