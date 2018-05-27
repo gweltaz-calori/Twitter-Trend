@@ -56,15 +56,6 @@ socketIo.on("connection", socket => {
   });
 });
 
-//alway send the index no matter what
-app.get("*", (req, res) => {
-  /* let index = fs.createReadStream(
-    path.resolve(__dirname, "../public/index.html")
-  );
-  index.pipe(res); */
-  res.sendFile(path.resolve(__dirname, "../public/index.html"));
-});
-
 // Retrieve the current trends so we can send them to the client
 app.get("/api/trends", async (req, res) => {
   try {
@@ -90,6 +81,15 @@ app.get("/api/trend", (req, res) => {
   res.send({
     trend: trendStream.trend
   });
+});
+
+//alway send the index no matter what
+app.get("*", (req, res) => {
+  /* let index = fs.createReadStream(
+    path.resolve(__dirname, "../public/index.html")
+  );
+  index.pipe(res); */
+  res.sendFile(path.resolve(__dirname, "../public/index.html"));
 });
 
 server.listen(process.env.SERVER_PORT, () => {

@@ -1,12 +1,13 @@
 # Demo
 
-Le projet est disponible à cette adresse
+Le plus simple est d'accéder à cette adresse
 [twitter.gweltaz-calori.com](https://twitter.gweltaz-calori.com)
 
 # Lancer le projet
 
 ```
 cp .env .env.dist
+Modifier les variables du .env
 npm install
 npm run start
 ```
