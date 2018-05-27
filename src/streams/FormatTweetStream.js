@@ -16,7 +16,7 @@ module.exports = class FormatTweetStream extends Transform {
         author: tweet.user.name,
         text: tweet.text,
         id: tweet.id,
-        image: tweet.user.profile_image_url
+        image: tweet.user.profile_image_url_https
       };
       this.push(JSON.stringify(formattedTweet));
     } catch (e) {}
